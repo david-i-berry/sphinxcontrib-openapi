@@ -17,6 +17,8 @@ from sphinxcontrib.openapi import _lib2to3 as lib2to3
 from sphinxcontrib.openapi.renderers import abc
 from sphinxcontrib.openapi.schema_utils import example_from_schema
 
+from .. import utils
+
 
 CaseInsensitiveDict = requests.structures.CaseInsensitiveDict
 
@@ -233,6 +235,8 @@ class HttpdomainRenderer(abc.RestructuredTextRenderer):
 
     def render_restructuredtext_markup(self, spec):
         """Spec render entry point."""
+
+        utils.normalize_spec(spec, **self.options)
 
         if spec.get("swagger") == "2.0":
             spec = lib2to3.convert(spec)
