@@ -236,7 +236,7 @@ class HttpdomainRenderer(abc.RestructuredTextRenderer):
     def render_restructuredtext_markup(self, spec):
         """Spec render entry point."""
 
-        utils.normalize_spec(spec, **self.options)
+        utils.normalize_spec(spec, **self._options)
 
         if spec.get("swagger") == "2.0":
             spec = lib2to3.convert(spec)
